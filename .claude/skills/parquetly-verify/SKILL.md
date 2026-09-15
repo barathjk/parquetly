@@ -69,11 +69,15 @@ extension/LICENSE.txt
 extension/package.json
 extension/readme.md
 extension/dist/extension.js
+extension/images/icon.png
 extension/media/main.js
 extension/media/styles.css
 ```
 
-plus `[Content_Types].xml` and `extension.vsixmanifest`. If `test/`, `docs/`, `.claude/`,
+plus `[Content_Types].xml` and `extension.vsixmanifest`. vsce rewrites relative README links
+to `https://github.com/barathjk/parquetly/blob/HEAD/...` using the `repository` field, and fails
+if it cannot. That failure means a README link would be broken on the store listing, so fix
+the link — do not re-add `--allow-missing-repository`. If `test/`, `docs/`, `.claude/`,
 `inputs/`, `src/` or `node_modules/` appear, fix `.vscodeignore` before going further.
 
 ## 5. Install — only when asked, or as part of an end-to-end check the user requested
