@@ -2,7 +2,7 @@
   "name": "parquetly",
   "displayName": "Parquetly",
   "description": "Open .parquet/.pq/.parq files in a fast, searchable, plottable table editor.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "barathjk",
   "license": "MIT",
   "engines": {
@@ -50,7 +50,7 @@
       }
     ]
   },
-  "icon": "images/icon.png",
+  "icon": "images/icon_v2.png",
   "pricing": "Free",
   "repository": {
     "type": "git",

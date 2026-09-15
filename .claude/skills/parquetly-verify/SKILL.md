@@ -69,7 +69,7 @@ extension/LICENSE.txt
 extension/package.json
 extension/readme.md
 extension/dist/extension.js
-extension/images/icon.png
+extension/images/<the file named by "icon" in package.json>
 extension/media/main.js
 extension/media/styles.css
 ```
