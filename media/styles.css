@@ -1,0 +1,770 @@
+/* ------------------------------------------------------------------ *
+ * Parquetly - all styling is driven by VS Code theme tokens, mapped to
+ * the custom properties below. Use ONLY these variables in this file so
+ * the UI auto-adapts to light / dark / high-contrast themes.
+ * ------------------------------------------------------------------ */
+:root {
+  --bg-primary: var(--vscode-editor-background);
+  --bg-secondary: var(--vscode-sideBar-background);
+  --fg-primary: var(--vscode-editor-foreground);
+  --fg-secondary: var(--vscode-descriptionForeground);
+  --border-color: var(--vscode-panel-border);
+  --accent: var(--vscode-button-background);
+  --accent-fg: var(--vscode-button-foreground);
+  --hover-bg: var(--vscode-list-hoverBackground);
+  --selected-bg: var(--vscode-list-activeSelectionBackground);
+  --selected-fg: var(--vscode-list-activeSelectionForeground);
+  --input-bg: var(--vscode-input-background);
+  --input-fg: var(--vscode-input-foreground);
+  --input-border: var(--vscode-input-border);
+  --table-header-bg: var(--vscode-editorGroupHeader-tabsBackground);
+
+  --row-height: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size, 13px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+/* ---------------------------------------------------------------- Toolbar */
+
+#toolbar {
+  flex: 0 0 auto;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#app-title {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--fg-primary);
+}
+
+#file-info {
+  color: var(--fg-secondary);
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60vw;
+}
+
+#mode-label {
+  color: var(--fg-secondary);
+  font-size: 0.9em;
+  min-width: 62px;
+}
+
+button {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 3px 9px;
+  font-family: inherit;
+  font-size: 0.9em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+button:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+button:disabled,
+button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Buttons that mutate data are dimmed and inert while read-only mode is on. */
+body.read-only .edit-only {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+input[type='text'],
+input[type='number'],
+select,
+textarea {
+  background: var(--input-bg);
+  color: var(--input-fg);
+  border: 1px solid var(--input-border);
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-family: inherit;
+  font-size: 0.9em;
+  outline: none;
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+}
+
+#search-input {
+  min-width: 240px;
+  flex: 0 1 320px;
+}
+
+#goto-input {
+  width: 90px;
+}
+
+/* Checkbox-driven CSS switch for the read/edit mode toggle. */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 18px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 18px;
+  transition: background 0.15s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  top: 2px;
+  background: var(--fg-secondary);
+  border-radius: 50%;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--accent);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(16px);
+  background: var(--accent-fg);
+}
+
+/* ------------------------------------------------------------- SQL bar */
+
+.sql-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sql-bar input {
+  flex: 1 1 auto;
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+
+.sql-bar .sql-hint {
+  color: var(--fg-secondary);
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------- Loading / error */
+
+#loading,
+#error-message {
+  padding: 10px 12px;
+  color: var(--fg-secondary);
+  font-size: 0.92em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#error-message {
+  color: var(--vscode-errorForeground, #f14c4c);
+  white-space: pre-wrap;
+}
+
+/* --------------------------------------------------------------- Table */
+
+#table-container {
+  flex: 1 1 auto;
+  overflow: auto;
+  position: relative;
+}
+
+/* The grid is built from flex rows rather than real table layout so that rows
+   can be absolutely positioned for virtual scrolling. */
+#data-table {
+  display: block;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+}
+
+#table-head {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+#table-head tr {
+  display: flex;
+  height: var(--row-height);
+}
+
+#table-head th {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  background: var(--table-header-bg);
+  color: var(--fg-primary);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9em;
+  line-height: calc(var(--row-height) - 1px);
+  padding: 0 8px;
+  height: var(--row-height);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#table-head th .th-label {
+  display: inline-block;
+  max-width: calc(100% - 14px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+#table-head th .sort-indicator {
+  color: var(--accent);
+  font-size: 0.9em;
+  margin-left: 3px;
+}
+
+#table-head th .col-type {
+  color: var(--fg-secondary);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 4px;
+}
+
+/* Drag handle on the right edge of each header cell for resizing. */
+#table-head th .col-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+}
+
+#table-head th.row-num-head,
+td.row-num {
+  text-align: right;
+  color: var(--fg-secondary);
+  background: var(--table-header-bg);
+  cursor: default;
+  font-variant-numeric: tabular-nums;
+}
+
+#table-body {
+  position: relative;
+  display: block;
+}
+
+#table-body tr {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  height: var(--row-height);
+  width: 100%;
+  contain: layout style;
+}
+
+#table-body td {
+  height: var(--row-height);
+  line-height: calc(var(--row-height) - 1px);
+  padding: 0 8px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  flex: 0 0 auto;
+}
+
+#table-body tr:hover {
+  background: var(--hover-bg);
+}
+
+#table-body tr.selected {
+  background: var(--selected-bg);
+  color: var(--selected-fg);
+}
+
+#table-body tr.selected td.row-num {
+  background: var(--selected-bg);
+  color: var(--selected-fg);
+}
+
+body:not(.read-only) #table-body td.editable-cell {
+  cursor: cell;
+}
+
+#table-body td.editing {
+  padding: 0;
+  overflow: visible;
+}
+
+#table-body td.editing input {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: 1px solid var(--accent);
+  font-size: 1em;
+}
+
+td.search-hit {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* Cell value styling */
+.null-value {
+  color: var(--fg-secondary);
+  font-style: italic;
+  opacity: 0.75;
+}
+
+.bool-true {
+  color: var(--vscode-charts-green, #4caf50);
+}
+
+.bool-false {
+  color: var(--vscode-charts-red, #f14c4c);
+}
+
+.number-value {
+  color: var(--vscode-charts-blue, #4fc1ff);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ---------------------------------------------------------- Status bar */
+
+#status-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 3px 12px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  color: var(--fg-secondary);
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------- Overlay panel system */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  max-width: 92vw;
+  max-height: 88vh;
+  min-width: 340px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  font-weight: 600;
+  border-radius: 5px 5px 0 0;
+}
+
+.panel-close {
+  background: transparent;
+  color: var(--fg-secondary);
+  border: none;
+  font-size: 1.15em;
+  line-height: 1;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.panel-close:hover {
+  color: var(--fg-primary);
+  filter: none;
+}
+
+.panel-body {
+  padding: 12px;
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.panel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.panel-controls label {
+  color: var(--fg-secondary);
+  font-size: 0.9em;
+}
+
+.panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 52vh;
+  overflow: auto;
+}
+
+.panel-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.92em;
+}
+
+.panel-item:hover {
+  background: var(--hover-bg);
+}
+
+.panel-item input[type='checkbox'] {
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.panel-item .item-count {
+  margin-left: auto;
+  color: var(--fg-secondary);
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel-apply {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Stats table inside panels */
+.stats-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.stats-table th,
+.stats-table td {
+  text-align: left;
+  padding: 3px 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stats-table th {
+  color: var(--fg-secondary);
+  font-weight: 600;
+}
+
+.stats-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------- Context menus */
+
+.context-menu {
+  position: fixed;
+  z-index: 200;
+  min-width: 190px;
+  padding: 4px 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  font-size: 0.9em;
+}
+
+.context-menu-item {
+  padding: 5px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--fg-primary);
+}
+
+.context-menu-item:hover {
+  background: var(--hover-bg);
+}
+
+.context-menu-item.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.context-menu-separator {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--border-color);
+}
+
+/* --------------------------------------------------------- Quick Plot */
+
+.plot-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.plot-area svg {
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  max-width: 100%;
+}
+
+.plot-area svg.panning {
+  cursor: grabbing;
+}
+
+.plot-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 6px 2px 0;
+  border-top: 1px solid var(--border-color);
+  color: var(--fg-secondary);
+  font-size: 0.85em;
+}
+
+.plot-stats b {
+  color: var(--fg-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.plot-axis-line {
+  stroke: var(--fg-secondary);
+  stroke-width: 1;
+}
+
+.plot-grid-line {
+  stroke: var(--border-color);
+  stroke-width: 1;
+}
+
+.plot-tick-label,
+.plot-axis-label {
+  fill: var(--fg-secondary);
+  font-size: 10px;
+}
+
+.plot-title {
+  fill: var(--fg-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.plot-subtitle {
+  fill: var(--fg-secondary);
+  font-size: 10px;
+}
+
+.plot-mean-line {
+  stroke: #ff9f40;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.plot-mean-label {
+  fill: #ff9f40;
+  font-size: 10px;
+}
+
+.pie-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px 12px;
+  padding-top: 8px;
+  font-size: 0.85em;
+}
+
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pie-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.pie-legend-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pie-legend-count {
+  margin-left: auto;
+  color: var(--fg-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------- Diff panel */
+
+.diff-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.diff-card {
+  flex: 1 1 130px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+}
+
+.diff-card .card-label {
+  display: block;
+  color: var(--fg-secondary);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.diff-card .card-value {
+  display: block;
+  font-size: 1.35em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.diff-section {
+  margin-bottom: 12px;
+  font-size: 0.9em;
+}
+
+.diff-section h4 {
+  margin: 0 0 4px;
+  font-size: 0.95em;
+}
+
+.diff-from {
+  color: var(--vscode-charts-red, #f14c4c);
+}
+
+.diff-to {
+  color: var(--vscode-charts-green, #4caf50);
+}
+
+.diff-empty {
+  color: var(--fg-secondary);
+  font-style: italic;
+}
