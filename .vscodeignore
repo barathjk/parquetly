@@ -15,6 +15,9 @@ webpack.config.js
 tsconfig.json
 **/*.ts
 !dist/extension.js
-!media/**
+media/assets/**
+CONTRIBUTING.md
+!media/main.js
+!media/styles.css
 !LICENSE
 !README.md

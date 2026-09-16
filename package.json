@@ -1,7 +1,7 @@
 {
   "name": "parquetly",
-  "displayName": "Parquetly",
-  "description": "Open .parquet/.pq/.parq files in a fast, searchable, plottable table editor.",
+  "displayName": "Parquetly - Parquet Viewer and Editor",
+  "description": "Parquet viewer and editor for VS Code. Open .parquet, .pq and .parq files as a fast, searchable, sortable, editable data table with charts and SQL-style filters.",
   "version": "0.1.1",
   "publisher": "barathjk",
   "license": "MIT",
@@ -10,15 +10,24 @@
   },
   "categories": [
     "Data Science",
-    "Visualization",
-    "Other"
+    "Visualization"
   ],
   "keywords": [
     "parquet",
+    "parquet viewer",
+    "parquet editor",
+    "parquet reader",
+    "parquet file",
     "pq",
     "parq",
-    "table",
-    "viewer"
+    "apache arrow",
+    "columnar",
+    "dataframe",
+    "data preview",
+    "table viewer",
+    "csv",
+    "big data",
+    "data science"
   ],
   "main": "./dist/extension.js",
   "activationEvents": [
