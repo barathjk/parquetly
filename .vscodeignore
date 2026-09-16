@@ -17,6 +17,7 @@ tsconfig.json
 !dist/extension.js
 media/assets/**
 CONTRIBUTING.md
+images/icon.png
 !media/main.js
 !media/styles.css
 !LICENSE
